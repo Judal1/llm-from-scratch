@@ -1,4 +1,6 @@
 import random
+from embedding import get_embedded
+from tokenizer import encode
 
 def create_weights(embedding_dim, vocab_size):
     weight = [
@@ -23,3 +25,14 @@ def forward_pass(embedded_sequence, weights):
 def predict_next_char(score_vector):
     max_index = score_vector.index(max(score_vector))
     return max_index
+
+def generate_text(start_sequence, weights, embedding_dict, itos,stoi, length):
+    final_sequence = start_sequence
+    for _ in range(length):
+        indexes = encode(final_sequence,stoi)
+        embedded = get_embedded(indexes,embedding_dict)
+        fw = forward_pass(embedded, weights)
+        print(fw)
+        index = predict_next_char(fw)
+        final_sequence += itos[index]
+    return final_sequence
