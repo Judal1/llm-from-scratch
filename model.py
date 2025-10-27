@@ -26,10 +26,11 @@ def predict_next_char(score_vector):
     max_index = score_vector.index(max(score_vector))
     return max_index
 
-def generate_text(start_sequence, weights, embedding_dict, itos,stoi, length):
+def generate_text(start_sequence, weights, embedding_dict, itos,stoi, length, window_size):
     final_sequence = start_sequence
     for _ in range(length):
-        indexes = encode(final_sequence,stoi)
+        window_sequence = final_sequence[-window_size:] if window_size > 0 else final_sequence
+        indexes = encode(window_sequence,stoi)
         embedded = get_embedded(indexes,embedding_dict)
         fw = forward_pass(embedded, weights)
         print(fw)

@@ -18,7 +18,7 @@ def main():
     
     
     print("the predicted index is = " , itos[predicted_index])
-    generated_text = generate_text(text, weights,embedding,itos,stoi,10)
+    generated_text = generate_text(text, weights,embedding,itos,stoi,200, 20)
     print("from ", text, " we generated : " , generated_text)
 
 if __name__ == "__main__":
