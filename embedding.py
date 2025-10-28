@@ -9,5 +9,4 @@ def create_embedding(stoi,vector_size):
     ]
     return embedding
 def get_embedded(indexes, embedding):
-    embedded = [embedding[index] for index in indexes]
-    return embedded
+    return [embedding[index] for index in indexes]
